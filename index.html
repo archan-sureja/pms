@@ -35,7 +35,7 @@
             </div>
             <div class="col">
                 <label for="sort_by">Sort By : </label>
-                <select name="sort_key" id="sort_by">
+                <select name="sort_key" id="sort_by" onchange="handleSort(event)">
                     <option value="Name">Product Name</option>
                     <option value="Id" selected>Product Id</option>
                     <option value="Price">Price</option>
@@ -43,7 +43,7 @@
             </div>
             <div class="col">
                 <label for="reverse">Desceding Order</label>
-                <input type="checkbox">
+                <input type="checkbox" id="reverse_check">
             </div>
         </div>
         <div class="col-9">
@@ -52,6 +52,7 @@
             </div>
         </div>
         <form class="bg bg-transparent col-3" id="product_input" enctype=multipart/form-data method="post">
+            <h4>ADD PRODUCT</h4>
             <div class="form-group">
                 <label for="exampleFormControlInput1">Product Name</label>
                 <input type="text" class="form-control" id="exampleFormControlInput1" name="Name" required>
