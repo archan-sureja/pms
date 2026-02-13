@@ -24,18 +24,21 @@
     </nav>
     <!--main-->
     <main class="row p-5">
-        <div class="row mb-3" style="width: 75%;">
+        <div class="row mb-3" style="width: 85%;">
             <div class="col">
                 <label for="start_id">From : </label>
                 <input type="number" min="1" id="start_id">
             </div>
             <div class="col">
                 <label for="end_id">To : </label>
-                <input type="number" min="2" id="end_id">
+                <input type="number" min="1" id="end_id">
             </div>
             <div class="col">
+                <button class="btn btn-primary" id="filter_btn">Filter</button>
+            </div> 
+            <div class="col">
                 <label for="sort_by">Sort By : </label>
-                <select name="sort_key" id="sort_by" onchange="handleSort(event)">
+                <select name="sort_key" id="sort_by">
                     <option value="Name">Product Name</option>
                     <option value="Id" selected>Product Id</option>
                     <option value="Price">Price</option>
@@ -48,11 +51,11 @@
         </div>
         <div class="col-9">
             <div class="d-flex justify-content-evenly flex-wrap " id="product_store">
-                
+               
             </div>
         </div>
-        <form class="bg bg-transparent col-3" id="product_input" enctype=multipart/form-data method="post">
-            <h4>ADD PRODUCT</h4>
+        <form class="bg bg-transparent col-3" id="product_input">
+            <h4>Product creation form</h4>
             <div class="form-group">
                 <label for="exampleFormControlInput1">Product Name</label>
                 <input type="text" class="form-control" id="exampleFormControlInput1" name="Name" required>
@@ -66,23 +69,45 @@
                 <textarea class="form-control" id="exampleFormControlTextarea3" rows="3" name="Description"></textarea>
             </div>
             <div class="mb-3">
-                <label for="product_image" class="form-label">Product Image</label>
-                <input class="form-control" type="file" accept=".jpg, .jpeg, .png" id="product_image" name="Image">
-            </div>
-            <div id="imagePreview" style=" width: 100%; height:50%">
-
+                <label for="product_image" class="form-label">Product Image Link</label>
+                <input class="form-control" type="url" id="image_link" name="ImageLink">
             </div>
             <button class="btn btn-primary" type="submit" id="add_btn">ADD</button>
+        </form>
+         <form class="bg bg-transparent col-3" id="product_update" style="display: none;">
+            <h4>Product Updation form</h4>
+             <div class="form-group">
+                <label for="updatedName">Product ID : </label>
+                <input type="text" class="form-control" id="productId" name="productId">
+            </div>
+            <div class="form-group">
+                <label for="updatedName">Product Name</label>
+                <input type="text" class="form-control" id="updatedName" name="updatedName" required>
+            </div>
+            <div class="form-group">
+                <label for="updatedPrice">Product Price</label>
+                <input type="number" class="form-control" id="updatedPrice" name="updatedPrice" required>
+            </div>
+            <div class="form-group">
+                <label for="updatedDescription">Product Description</label>
+                <textarea class="form-control" id="updatedDescription" rows="3" name="updatedDescription"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="updatedImageLink" class="form-label">Product Image Link</label>
+                <input class="form-control" type="url" id="updatedImageLink" name="updatedImageLink">
+            </div>
+            <button class="btn btn-primary" type="submit" id="update_btn">Update</button>
+            <button class="btn btn-danger" type="button" id="cancel_btn">cancel</button>
         </form>
 
     </main>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-    crossorigin="anonymous">
-</script>
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
+    </script>
 <script src="productStore.js"></script>
 <script src="utils.js"></script>
 <script src="main.js"></script>
+
 </html>

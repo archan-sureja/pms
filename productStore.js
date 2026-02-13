@@ -18,16 +18,17 @@ class productStore {
         let isUpdated = false
         for (let i = 0; i < this.product_list.length; i++) {
             if (this.product_list[i].Id== product_id) {
-                originalProduct = this.product_list[i]
-                this.product_list[i] = { ...originalProduct, ...update }
+                let originalProduct = this.product_list[i]
+                this.product_list[i] = {...originalProduct , ...update}
                 localStorage.setItem("productStore", JSON.stringify(this.product_list))
+                isUpdated = true 
                 return isUpdated
             }
         }
         return isUpdated
     }
     list() {
-        return this.product_list
+        return JSON.parse(localStorage.getItem("productStore"))
     }
 }
 
