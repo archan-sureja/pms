@@ -1,6 +1,9 @@
+const productstore = new productStore()
+let current_products = productstore.list()
 document.addEventListener("DOMContentLoaded", () => {
-    productstore = new productStore()
-    displayProducts(productstore.list())
+   
+    displayProducts(current_products)
+   
     document.getElementById("product_input").addEventListener('submit',handleAdd)
     document.getElementById('sort_by').addEventListener("change", handleSort)
     document.getElementById('reverse_check').addEventListener("change", handleSort)
@@ -18,8 +21,8 @@ function handleSort() {
     let sort_key = document.getElementById('sort_by').value
     let reverse = document.getElementById('reverse_check').checked
     console.log(sort_key,reverse)
-    res = sort_products(productstore.list(), sort_key, reverse)
-    displayProducts(res)
+    current_products = sort_products(current_products, sort_key, reverse)
+    displayProducts(current_products)
 }
 
 function onchangeStart(){
@@ -35,13 +38,19 @@ function handleFilter(){
     let start_id = document.getElementById('start_id').value
     let end_id = document.getElementById('end_id').value
     start_id = parseInt(start_id)
-    let res = filter_products(productstore.list(),start_id,end_id)
-    console.log(res)
-    displayProducts(res)
+    current_products = filter_products(productstore.list(),start_id,end_id)
+    console.log(current_products)
+    displayProducts(current_products)
     
     
 }
+function resetSortandFilter(){
+    document.getElementById('start_id').value = 1 
+    document.getElementById('end_id').value = productstore.list().length;
+    document.getElementById('sort_by').value = "Id"
+    document.getElementById('reverse_check').checked = false
 
+}
 function updateProduct(event){
     event.preventDefault()
     let product_id = parseInt(event.target.productId.value)
@@ -52,7 +61,9 @@ function updateProduct(event){
     }
     if(productstore.update(product_id,update)){
         alert('update successfull!')
-        displayProducts(productstore.list())
+        current_products = productstore.list()
+        displayProducts(current_products)
+        resetSortandFilter()
         cancelUpdate()
     }
 }
@@ -83,7 +94,9 @@ function handleAdd(event){
     product.Description = event.target.Description.value
     product.Image = event.target.ImageLink.value
     productstore.add(product)
-    displayProducts(productstore.list())
+    resetSortandFilter()
+    current_products=productstore.list()
+    displayProducts(current_products)
 } 
  
 function displayProducts(product_list) {
